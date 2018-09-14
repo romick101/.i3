@@ -3,8 +3,8 @@
 #-------------------------------------------------------------------------------
 
 # monitor setup
-set $out_main eDP1
-set $out_alt  eDP1
+set $out_main HDMI1
+set $out_alt  HDMI1
 
 # handy aliases
 set $mod Mod4
@@ -14,10 +14,10 @@ set $i3 ~/.i3
 
 floating_modifier $mod
 font pango:monaco bold 8
-gaps inner 7
-new_window pixel 3
-smart_gaps on
-smart_borders on
+# gaps inner 7
+# new_window pixel 3
+# smart_gaps on
+# smart_borders on
 
 # colors
 # colorscheme consists of the following colors
@@ -31,20 +31,20 @@ smart_borders on
 #    #5e0b0b    (94, 11,  11)    blood red
 #
 # focused
-set $cf_border     #54295c
-set $cf_background #54295c
-set $cf_text       #000000
+set $cf_border     #007acc
+set $cf_background #007acc
+set $cf_text       #FFFFFF
 # active
-set $ca_border     #1e0f1d
-set $ca_background #1e0f1d
+set $ca_border     #ff9999
+set $ca_background #ff9999
 set $ca_text       #ffffff
 # inactive
-set $ci_border     #1e0f1d
-set $ci_background #1e0f1d
+set $ci_border     #00264d
+set $ci_background #00264d
 set $ci_text       #ffffff
 # urgent
-set $cu_border     #5e0b0b
-set $cu_background #5e0b0b
+set $cu_border     #005c99
+set $cu_background #005c99
 set $cu_text       #ffffff
 # class                 border     background     text     indicator
 client.focused          $cf_border $cf_background $cf_text $cf_border
@@ -77,7 +77,7 @@ for_window [class="Display"] floating enable
 #-------------------------------------------------------------------------------
 exec_always killall kbdd nm-applet compton twmnd conky
 exec_always $i3/scripts/screen.sh $out_main $out_alt
-exec_always setxkbmap us,ua -option grp:switch,grp:shifts_toggle,ctrl:nocaps
+exec_always setxkbmap us,ru,ua -option grp:switch,grp:win_space_toggle,ctrl:swapcaps  
 exec_always --no-startup-id compton --config $i3/components/compton/compton.conf
 exec_always --no-startup-id nm-applet
 exec_always --no-startup-id kbdd
@@ -99,15 +99,15 @@ bar {
     position top
     output $out_main
     status_command i3blocks -c $i3/components/i3blocks/top.conf
-    font pango:FontAwesome 10.5
+    font pango:FontAwesome 10
     separator_symbol " "
     tray_output none
     binding_mode_indicator no
 
-    height 22
+    #height 22                   
 
     colors {
-        background         #000000
+        background         #003366
         statusline         #ffffff
         focused_workspace  #000000 $cf_background $cf_text
         active_workspace   #000000 $ca_background $ca_text
@@ -117,22 +117,22 @@ bar {
 }
 
 # bottom
-bar {
-    id bottombar
-    position bottom
-    output $out_main
-    workspace_buttons no
-    separator_symbol " "
-    font pango:FontAwesome 10.5
-    status_command i3blocks -c $i3/components/i3blocks/bot.conf
-    tray_output primary
-    height 22
+#bar {
+#    id bottombar
+#    position bottom
+#    output $out_main
+#    workspace_buttons no
+#    separator_symbol " "
+#    font pango:FontAwesome 10.5
+#    status_command i3blocks -c $i3/components/i3blocks/bot.conf
+#    tray_output primary
+    #height 22
 
-    colors {
-        background       #000000
-        urgent_workspace #000000 $cu_background $cu_text
-    }
-}
+#    colors {
+#        background       #000000
+#        urgent_workspace #000000 $cu_background $cu_text
+#    }
+#}
 #-------------------------------------------------------------------------------
 
 
@@ -162,7 +162,7 @@ bindsym $mod+o mode "$mode_launcher"
 mode "$mode_launcher" {
     bindsym f exec firefox; mode "default"
     bindsym e exec emacs; mode "default"
-    bindsym t exec xdg-open ~/; mode "default"
+    bindsym t exec nautilus; mode "default"
     bindsym r exec $tor_browser; mode "default"
 
     bindsym Escape mode "default"
@@ -196,7 +196,7 @@ bindsym $mod+Shift+Return exec $term
 
 # start a program/window chooser
 bindsym $mod+p         exec rofi -show run    -config $i3/components/rofi/rofi.conf
-bindsym $mod+Shift+p   exec rofi -show drun   -config $i3/components/rofi/rofi.conf
+bindsym $mod+Shift+p   exec rofi -modi drun -show drun   -config $i3/components/rofi/rofi.conf
 bindsym $mod+Control+p exec rofi -show window -config $i3/components/rofi/rofi.conf
 
 # kill focused window
@@ -287,5 +287,5 @@ bindsym $mod+Shift+period $execf xbacklight -inc 10
 
 
 # custom apps
-bindsym $mod+Shift+apostrophe exec slock
+bindsym $mod+Shift+apostrophe exec $i3/scripts/i3lock.sh;
 #-------------------------------------------------------------------------------
