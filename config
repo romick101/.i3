@@ -3,8 +3,8 @@
 #-------------------------------------------------------------------------------
 
 # monitor setup
-set $out_main HDMI1
-set $out_alt  HDMI1
+set $out_main HDMI-0
+set $out_alt  HDMI-0
 
 # handy aliases
 set $mod Mod4
@@ -87,9 +87,6 @@ exec        --no-startup-id i3-msg workspace 1
 #-------------------------------------------------------------------------------
 
 
-
-
-
 #-------------------------------------------------------------------------------
 # bars
 #-------------------------------------------------------------------------------
@@ -97,7 +94,8 @@ exec        --no-startup-id i3-msg workspace 1
 bar {
     id topbar
     position top
-    output $out_main
+    # output $out_main
+    # output $out_alt
     status_command i3blocks -c $i3/components/i3blocks/top.conf
     font pango:FontAwesome 10
     separator_symbol " "
@@ -117,23 +115,22 @@ bar {
 }
 
 # bottom
-#bar {
-#    id bottombar
-#    position bottom
-#    output $out_main
-#    workspace_buttons no
-#    separator_symbol " "
-#    font pango:FontAwesome 10.5
-#    status_command i3blocks -c $i3/components/i3blocks/bot.conf
-#    tray_output primary
-    #height 22
+# bar {
+#     id bottombar
+#     position bottom
+#     output $out_main
+#     workspace_buttons no
+#     separator_symbol " "
+#     font pango:FontAwesome 10.5
+#     status_command i3blocks -c $i3/components/i3blocks/bot.conf
+#     tray_output primary
 
-#    colors {
-#        background       #000000
-#        urgent_workspace #000000 $cu_background $cu_text
-#    }
-#}
-#-------------------------------------------------------------------------------
+#     colors {
+#         background       #000000
+#         urgent_workspace #000000 $cu_background $cu_text
+#     }
+# }
+# -------------------------------------------------------------------------------
 
 
 

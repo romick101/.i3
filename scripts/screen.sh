@@ -13,7 +13,7 @@ W_ALT=$HOME/.i3/graphics/wallpapers/wallpaper_alt
 if [ "$1" == "$2" ]; then
     xrandr --output $1 --auto --primary
 else
-    xrandr --output $1 --auto --primary --output $2 --auto --right-of $1
+    xrandr --output $1 --auto --primary --output $2 --auto --left-of $1
     xrandr --output $1 --auto --primary --output $2 --off
     # non-empty parameter triggers toggle mode
     if [ -z "$3" ]; then
@@ -23,7 +23,7 @@ else
     else
         if [ ! -e $TOGGLE ]; then
             touch $TOGGLE
-            xrandr --output $2 --auto --right-of HDMI1
+            xrandr --output $2 --auto --left-of $1
         else
             rm $TOGGLE
             xrandr --output $2 --off
